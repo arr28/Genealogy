@@ -1,0 +1,265 @@
+<HTML>
+<HEAD>
+<TITLE>The GEDCOM Standard Release 5.5: Appendix E</TITLE>
+<!-- This file was created by the WP2X program, using an HTML 
+descriptor file (Version 1) written by Michael Richardson
+Do not expect everything to be converted perfectly.  -->
+</HEAD>
+<BODY>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+<H1 align=center>The GEDCOM Standard Release 5.5</H1>
+<H2 align=center> Appendix E</H2>
+<B>Encoding and Decoding Algorithms for Multimedia Objects</B>
+<br>
+<B><a name=S1></a> Introduction:</B>
+<br>
+<br>
+Embedded multimedia objects in GEDCOM requires special handling.  These objects are
+normally represented by binary files containing characters which interfere with data
+transmission protocols. This document describes how the binary characters are encoded
+for transmission and then decoded to rebuild the multimedia file.
+<br>
+<br>
+The algorithm for encoding binary images, compatible with GEDCOM transmission, is
+similar to an encoding scheme that would be used in creating a hexadecimal
+representation, but it uses a base-64 number representation rather than base-16 number
+representation.
+<br>
+<br>
+<B><a name=S2></a>Encoding:</B>
+<br>
+<br>
+This algorithm is for converting multimedia images represented in binary numbers into a
+collection that does not contain any of the ASCII control characters.  This conversion
+eliminates the occurrence of special characters such as the "@" which has special
+meaning to GEDCOM.
+<br>
+<br>
+The encoding routine converts a binary multimedia file segment of from 1 to 54 bytes in
+length into an encoded GEDCOM line value of 2 to 64 bytes in length.  This encoded
+value becomes the &lt;<a href=55gcch2.htm#ENCODED_MULTIMEDIA_LINE>ENCODED_MULTIMEDIA_LINE</a>&gt; used in the
+<a href=55gcch2.htm#MULTIMEDIA_RECORD>MULTIMEDIA_RECORD</a>.
+<br>
+<br>
+The algorithm accomplishes its goal using the following steps:
+<br>
+<br>
+  1.Each 3 bytes (24 bits) of the binary 1 to 54 character segment is divided into four
+(6-bit) values. Each of these (6-bit) values are converted into an (8-bit) character
+making a character whose hexadecimal representation is between 0x00 and 0x3F
+(0 to 63 decimal.)
+<br>
+<br>
+  2.Each of the 4 new characters represents an Encoding key which is used to obtain
+the new replacement character from an Encoding Table included in this appendix.
+<br>
+<br>
+  3.Exception processing may be required in processing the last 3 byte chunk of the 1
+to 54 character segment, which may consist of 0, 1, or 2 bytes:
+<br>
+<br>
+<br>
+<br>
+      
+<em u> Retrieved</em>
+    
+<em u> Action</em>
+<br>
+    a.  0 bytesPad the last 3 characters with 0xFF. The conversion is complete.
+<br>
+    b.  1 byte:Pad last two bytes with 0xFF then complete steps 1 and 2 above.
+<br>
+    c.  2 bytes:Pad last byte with 0xFF then complete steps 1 and 2 above.
+<br>
+<br>
+  5.Repeat until all characters in the received line value has been substituted. The
+return value of new encoded characters should contain from 4 to 72 characters. 
+The length of the return value will always be a multiple of 4.
+<br>
+<br>
+<br>
+<B><a name=S3></a> Decoding:</B>
+<br>
+<br>
+The Decoding routine converts the encoded line value back into the original binary
+character multimedia file segment.
+<br>
+<br>
+The decoding algorithm can be accomplished in the following steps:
+<br>
+<br>
+  1.Each encoded multimedia line segment is divided into sets of 4 (8-bit) characters.
+<br>
+<br>
+  2.Each of these characters becomes a decoding key used to look up a corresponding
+character from the Decoding Table.  A new (24-bit) group is formed by
+concatenating the low-order 6 bits from each of the 4 characters obtained from the
+decoding table.
+<br>
+<br>
+  3.Divide this new 24 bit group created by step 2 into three (8-bit) characters and
+concatenate them into the stream of characters being built as the decoded results.
+<br>
+<br>
+  4.Processing ends when the 0xFF padded bytes are encountered.
+<br>
+
+<!-- HardPage --><p>
+  
+<B> Encoding Table</B>
+<br>
+<PRE>
+    Encoding  Replacement
+    
+              Key   Character
+    0x00      0x2E  .
+    0x01      0x2F  /
+    0x02      0x30  0
+    0x03      0x31  1
+    0x04      0x32  2
+    0x05      0x33  3
+    0x06      0x34  4
+    0x07      0x35  5
+    0x08      0x36  6
+    0x09      0x37  7
+    0x0A      0x38  8
+    0x0B      0x39  9
+              ----  --
+    0x0C      0x41  A
+    0x0D      0x42  B
+    0x0E      0x43  C
+    0x0F      0x44  D
+    0x10      0x45  E
+    0x11      0x46  F
+    0x12      0x47  G
+    0x13      0x48  H
+    0x14      0x49  I
+    0x15      0x4A  J
+    0x16      0x4B  K
+    0x17      0x4C  L
+    0x18      0x4D  M
+    0x19      0x4E  N
+    0x1A      0x4F  O
+    0x1B      0x50  P
+    0x1C      0x51  Q
+    0x1D      0x52  R
+    0x1E      0x53  S
+    0x1F      0x54  T
+    0x20      0x55  U
+    0x21      0x56  V
+    0x22      0x57  W
+    0x23      0x58  X
+    0x24      0x59  Y
+    0x25      0x5A  Z
+              ----  --
+    0x26      0x61  a
+    0x27      0x62  b
+    0x28      0x63  c
+    0x29      0x64  d
+    0x2A      0x65  e
+    0x2B      0x66  f
+    0x2C      0x67  g
+    0x2D      0x68  h
+    0x2E      0x69  i
+    0x2F      0x6A  j
+    0x30      0x6B  k
+    0x31      0x6C  l
+    0x32      0x6D  m
+    0x33      0x6E  n
+    0x34      0x6F  o
+    0x35      0x70  p
+    0x36      0x71  q
+    0x37      0x72  r
+    0x38      0x73  s
+    0x39      0x74  t
+    0x3A      0x75  u
+    0x3B      0x76  v
+    0x3C      0x77  w
+    0x3D      0x78  x
+    0x3E      0x79  y
+    0x3F      0x7A  z
+</PRE>
+  
+<B> Decoding Table</B>
+<br>
+<br>
+<PRE>
+Decoding  Replacement
+    
+Key       Character
+
+    0x2E  .    0x00
+    0x2F  /    0x01
+    0x30  0    0x02
+    0x31  1    0x03
+    0x32  2    0x04
+    0x33  3    0x05
+    0x34  4    0x06
+    0x35  5    0x07
+    0x36  6    0x08
+    0x37  7    0x09
+    0x38  8    0x0A
+    0x39  9    0x0B
+    0x3A - 0x40     not valid
+    0x41  A    0x0C
+    0x42  B    0x0D
+    0x43  C    0x0E
+    0x44  D    0x0F
+    0x45  E    0x10
+    0x46  F    0x11
+    0x47  G    0x12
+    0x48  H    0x13
+    0x49  I    0x14
+    0x4A  J    0x15
+    0x4B  K    0x16
+    0x4C  L    0x17
+    0x4D  M    0x18
+    0x4E  N    0x19
+    0x4F  O    0x1A
+    0x50  P    0x1B
+    0x51  Q    0x1C
+    0x52  R    0x1D
+    0x53  S    0x1E
+    0x54  T    0x1F
+    0x55  U    0x20
+    0x56  V    0x21
+    0x57  W    0x22
+    0x58  X    0x23
+    0x59  Y    0x24
+    0x5A  Z    0x25
+    0x5B - 0x60  not valid
+    0x61  a    0x26
+    0x62  b    0x27
+    0x63  c    0x28
+    0x64  d    0x29
+    0x65  e    0x2A
+    0x66  f    0x2B
+    0x67  g    0x2C
+    0x68  h    0x2D
+    0x69  i    0x2E
+    0x6A  j    0x2F
+    0x6B  k    0x30
+    0x6C  l    0x31
+    0x6D  m    0x32
+    0x6E  n    0x33
+    0x6F  o    0x34
+    0x70  p    0x35
+    0x71  q    0x36
+    0x72  r    0x37
+    0x73  s    0x38
+    0x74  t    0x39
+    0x75  u    0x3A
+    0x76  v    0x3B
+    0x77  w    0x3C
+    0x78  x    0x3D
+    0x79  y    0x3E
+    0x7A  z    0x3F
+</PRE>
+<p>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+</BODY></HTML>
+

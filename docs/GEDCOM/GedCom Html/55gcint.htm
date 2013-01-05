@@ -1,0 +1,362 @@
+<HTML>
+<HEAD>
+<TITLE>The GEDCOM Standard Release 5.5: Introduction</TITLE>
+<!-- This file was created by the WP2X program, using an HTML 
+descriptor file (Version 1) written by Michael Richardson
+Do not expect everything to be converted perfectly.  -->
+</HEAD>
+<BODY>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+<H1 align=center>The GEDCOM Standard Release 5.5</H1>
+<H2 align=center>Introduction</H2>
+<br>
+GEDCOM was developed by the Family History Department of The Church of Jesus Christ of
+Latter-day Saints (LDS Church) to provide a flexible, uniform format for exchanging computerized
+genealogical data. GEDCOM is an acronym for 
+<B> 
+<em u> GE</B>
+</em>
+nealogical 
+<B> 
+<em u> D</B>
+</em>
+ata 
+<B> 
+<em u> Com</em>
+</B>
+munication. Its purpose is
+to foster the sharing of genealogical information and the development of a wide range of inter-operable software products to assist genealogists, historians, and other researchers.
+<br>
+<br>
+<B><a name=S1></a> Purpose and Content of <em i>The GEDCOM Standard</em></B>
+<br>
+<br>
+<em i>The GEDCOM Standard</em> is a technical document written for computer programmers, system
+developers, and technically sophisticated users. It covers the following topics:
+<br>
+<br>
+<UL>
+<LI>GEDCOM Data Representation Grammar (see <a href=55gcch1.htm>Chapter 1</a>)
+<LI>Lineage-Linked Grammar (see <a href=55gcch2.htm>Chapter 2</a>)
+<LI>Lineage-Linked GEDCOM Tags (see <a href=55gcch2.htm>Chapter 2</a> and <a href=55gcappa.htm>Appendix A</a>)
+<LI>Cross Reference of Structures and Primitives (see <a href=55gcappb.htm>Appendix B</a>)
+<LI>The Church of Jesus Christ of Latter-day Saints' temple codes (see <a href=55gcappc.htm>Appendix C</a>)
+<LI>ANSEL Character Codes (see <a href=55gcch3.htm>Chapter 3</a>, and <a href=55gcappd.htm>Appendix D</a>)
+</UL>
+<br>
+<br>
+This document describes GEDCOM at two different levels. <a href=55gcch1.htm>Chapter 1</a> describes the lower level,
+known as the <em i>
+<B> GEDCOM data format.</B>
+</em> This is a general-purpose data representation language for
+representing any kind of structured information in a sequential medium. It discusses the syntax and
+identification of structured information in general, but it does not deal with the semantic content of
+any particular kind of data. It is, therefore, also useful to people using GEDCOM for storing other
+types of data, not just genealogical data.
+<br>
+<br>
+<a href=55gcch2.htm>Chapter 2</a> of this document describes the higher level, known as a <em i>
+<B> GEDCOM form.</B>
+</em> Each type of
+data that uses the GEDCOM data format has a specific GEDCOM form. This document discusses
+only one GEDCOM form: the <em i>Lineage-Linked GEDCOM Form.</em> This is the form commercial
+software developers use to create genealogical software systems that can exchange compiled
+information about individuals with accompanying family, source, submitter, and note records with
+the Family History Department's FamilySearch Systems and with each other if desired.
+<br>
+<br>
+<br>
+This document is available on the internet at:
+<B><a href=ftp://ftp.gedcom.org/pub/genealogy>ftp.gedcom.org/pub/genealogy</a></B>
+<br>
+<br>
+<B><a name=S2></a> Purposes for Version 5.x</B>
+<br>
+<br>
+Earlier versions of <em i>The GEDCOM Standard</em> were released in October 1987 (3.0) and August 1989
+(4.0). Versions 1 and 2 were drafts for public discussion and were not established as a standard.
+<br>
+<br>
+The 5.x series of drafts includes both the first standard definition of the Lineage-Linked GEDCOM
+Form and also the first major expansion of the Lineage-Linked Form since its initial use in
+GEDCOM 3.0. The GEDCOM-compatible products registered as 4.0 systems should still be able to
+exchange all of the data that was previously handled by their product with GEDCOM 5.x systems. See 
+<a href=55gcch2.htm#S4>Compatibility with Previous GEDCOM Releases</a> for compatibility
+specifics.
+<br>
+<br>
+The following are the expanded purposes of Lineage-Linked GEDCOM :
+<br>
+<br>
+<UL>
+<LI>Simplify the description of the GEDCOM data representation grammar (rules) for ease of
+understanding. (See <a href=55gcch1.htm>Chapter 1</a>.)
+<LI>Standardize the valid contexts in which tags, values, and pointers appear in the Lineage-Linked
+GEDCOM Form. (See <a href=55gcch2.htm>Chapter 2</a>.) The Lineage-Linked GEDCOM Form
+should not be confused with other GEDCOM forms, which apply the basic GEDCOM data
+format but use different tag, value, and pointer combinations for other purposes.
+<LI>Define new data representations for supporting information such as sources, source citations,
+repositories, submitter records, submission records, and notes. (See <a href=55gcch2.htm>Chapter 2</a> for
+GEDCOM representation of these support structures as used by the lineage-linked grammar.)
+<LI>Define a generic event structure.
+<LI>Define a way of associating individuals one to another.  This is accomplished through a pointer
+which points from one individual record to another with a user-defined relationship description
+placed subordinate to this pointer.  This feature is not a substitute for handling direct family
+relationships. Direct family relationships are represented by the FAMC and FAMS pointers.
+<LI>Add a product version number and a GEDCOM form and version number to the HEADer
+record structure.
+<LI>Define DATE modifiers (FROM, TO, ABT, BEF, AFT, BET) and more rigorously define the
+regular date format.
+<LI>Define an integration of multimedia within GEDCOM.
+</UL>
+<br>
+<br>
+<B><a name=S3></a> Modifications in Version 5.5 as a result of the 5.4 (draft) review</B>
+<br>
+<br>
+<UL>
+<LI>Added tags for storing detailed address pieces under the address structure.
+<br>
+<br>
+<LI>Added nickname and surname prefix name pieces to the personal name structure.
+<br>
+<br>
+<LI>Added subordinate source citation to the note structure.
+<br>
+<br>
+<LI>Changed the encoding rules and the structure for including embedded multimedia objects.
+<br>
+<br>
+<LI>Added a RIN tag to the record structures.  The RIN tag is a record identification assigned to the
+record by the source software.  Its intended use is to allow for automated access to that record
+upon receipt of return transactions or other reconciliation processes.
+<br>
+<br>
+<LI>The meaning of a GEDCOM tag without a value on its line depends on its subordinate context
+for any assertions intended by the researcher. For example, In an event structure, a subordinate
+DATE and/or PLACe value imply that an event happened. However, a subordinate NOTE orSOURce context by themselves do not imply that the event took place. For a researcher to
+indicate that an event took place without knowing a date or a place requires that a Y(es) value
+be added to the event tag line.  Using this convention protects GEDCOM processors which may
+remove (prune) lines that have no value and also no subordinate lines. A N(o) value must not be
+used on an event tag line to assert that the event never happened. This requires the definition of
+a different tag.
+<br>
+<br>
+<LI>Returned the calendar escape sequence to support alternate calendars.
+<br>
+<br>
+<LI>The definition of the date value was refined to include many of the potential ways in which a
+person may define an imprecise date in a free form text field.  Systems which guide users
+through a date statement should not result in such a precise way of stating an imprecise date. 
+For example, if software was to estimate a marriage date based on an algorithm involving the
+birth date of the couple's first child, hardly needs to say "EST ABT 1881".
+<br>
+<br>
+<LI>The following tags were added:
+<br>
+ADR1, ADR2, CITY, NICK, POST, SPFX
+</UL>
+<br>
+<br>
+<B><a name=S4></a> Changes Introduced or Modified in Draft Version 5.4</B>
+<br>
+<br>
+Some changes introduced in GEDCOM draft version 5.4 are not compatible with earlier 5.x draft
+forms. Some concepts have been removed with the intent to address them in a future release of
+GEDCOM.   The following features are either new or different:
+<br>
+<br>
+<UL>
+<LI>The use of the SCHEMA has been eliminated. Although the schema concept is valid and
+essential to the growth of GEDCOM, it is too complex and premature to be implemented
+successfully into current products. Implementing it too early could cause developers to spend a
+great deal of resources programming something that would be outdated very quickly. Object
+definition languages are likely to contribute to meeting these needs.
+<br>
+<br>
+<LI>The EVENT_RECORD context has been deleted. This context was intended to support the
+evidence record concept in the Lineage-Linked GEDCOM Form, which ended up being more
+complicated than first supposed. Understanding the difference between the role of a source
+record and the role of a so-called evidence record requires further study.
+<br>
+<br>
+<LI>Non-standard tags (see &lt;<a href=55gcch2.htm#NEW_TAG>NEW_TAG</a>&gt;) can be used within a GEDCOM transmission,
+provided that the first character is an underscore (for example _NUTAG). Non-standard tags
+should be used only when structured information cannot be represented using existing context.
+Using a Note field is a more universal way of transmitting genealogical data that does not fit
+into the standard GEDCOM structure.
+<br>
+<br>
+<LI>The SOURCE_RECORD structure was simplified into five basic sections: data or classification,
+author, title, publication facts, and repository. The data or classification section contains facts
+about the data represented by this source and is used to analyze the collection of sources that the
+researcher used. The author, title, publication facts, and repository sections provide free-form
+text blocks that inform subsequent researchers how to access the source data that the original
+researcher used.
+<br>
+<br>
+<LI>The &lt;&lt;SOURCE_CITATION&gt;&gt; structure is placed subordinate to the fact being cited. It is
+generally best if the source citation contains only information specific to the fact being cited and
+then points to the more general description of the source, defined in a SOURCE_RECORD.
+This reduces redundancy, provides a way of controlling the GEDCOM record size, and more
+closely represents the normalized data model.
+<br>
+<br>
+Systems that represent sources using the AUTHor, TITLe, PUBLication, and REPOsitory
+descriptions <em i>can and should always pass this information in GEDCOM using the SOURce record</em>
+pointed to by the &lt;&lt;SOURCE_CITATION&gt;&gt;. Systems that do not represent source
+information in these categories should provide the following information as unstructured text
+using the tags, TITL, AUTH, PUBL, and REPO, respectively, within the text:
+<br>
+<UL>
+  <LI>A descriptive title of the source
+<br>
+  <LI>Who created the work
+<br>
+  <LI>When and where was it created
+<br>
+  <LI>Where can it be obtained or viewed
+</UL>
+<br>
+<br>
+<LI>Some attributes of individuals such as their EDUCation, OCCUpation, RESIdence, or nobility
+TITLe need to be described using a date and place.  Therefore, the structure to describe the
+attributes was formatted to be the same as for describing events. That is, these attributes are
+further defined using a date, place, and other values used to describe events. (See
+&lt;&lt;<a href=55gcch2.htm#INDIVIDUAL_EVENT_STRUCTURE>INDIVIDUAL_EVENT_STRUCTURE</a>&gt;&gt;.)
+<br>
+<br>
+<LI>The LDS ordinance structure was extended to include the place of a living LDS ordinance. The
+TYPE tag line was changed to a STATus tag line.  This allows statements such as <em i>BIC,
+canceled, Infant,</em> and so forth to be removed from the date line and be added here under the
+STATus tag. (See &lt;<a href=55gcch2.htm#LDS_BAPTISM_DATE_STATUS>LDS_<em i>(ordinance)</em>_DATE_STATUS</a>&gt;) where <em i>(ordinance)</em>
+represents any of the following:
+<a href=55gcch2.htm#LDS_BAPTISM_DATE_STATUS>BAPTISM</a>,
+<a href=55gcch2.htm#LDS_ENDOWMENT_DATE_STATUS>ENDOWMENT</a>,
+<a href=55gcch2.htm#LDS_CHILD_SEALING_DATE_STATUS>CHILD_SEALING</a>, or
+<a href=55gcch2.htm#LDS_SPOUSE_SEALING_DATE_STATUS>SPOUSE_SEALING</a>.
+<br>
+<br>
+<LI>Previous GEDCOM 5.x versions overloaded the FAMC pointer structure with subordinate
+events which connected individual events and an associated family.  An adoption event, for
+example, was shown subordinate to the FAMC pointer to indicate which was the adoptive
+family. The sealing of child to parent event (SLGC) was also shown in this manner.  GEDCOM
+5.4 recognizes that these are events and should be at the same level as the other individual
+events.  To show the associated family, a subordinate FAMC pointer is placed subordinate to
+the appropriate event. (See &lt;&lt;<a href=55gcch2.htm#INDIVIDUAL_EVENT_STRUCTURE>INDIVIDUAL_EVENT_STRUCTURE</a>&gt;&gt; and
+<a href=55gcch2.htm#LDS_INDIVIDUAL_ORDINANCE>LDS_INDIVIDUAL_ORDINANCE</a>)
+<br>
+<br>
+<LI>The date modifier (
+<B> int</B>
+) was added to the date format to indicate that the associated date phrase
+has been interpreted and the interpretation follows the 
+<B> int</B>
+ prefix in the date field.  The date
+phrase is also included in the date value enclosed in parentheses. (See
+&lt;
+<a href=55gcch2.htm#DATE_APPROXIMATED>DATE_APPROXIMATED</a>&gt;.)
+<br>
+<br>
+<LI>The &lt;AGE_AT_EVENT&gt; primitive definition now includes the key words <em i>STILLBORN,
+INFANT,</em> and <em i>CHILD.</em> These words should be interpreted as being an approximate age at an
+event. (See &lt;
+<a href=55gcch2.htm#AGE_AT_EVENT>AGE_AT_EVENT</a>&gt;.)
+<br>
+<br>
+<LI>The family event context in the FAMily record now allows the ages of both the husband and
+wife at the time of the event to be shown. (See
+<a href=55gcch2.htm#FAM_RECORD>FAM_RECORD</a>)
+<br>
+<br>
+<LI>The &lt;&lt;PERSONAL_NAME_STRUCTURE&gt;&gt; structure now allows name pieces to be
+specifically identified as subordinate parts of the name line. Most products will not use
+subordinate name pieces. A nickname can now be included on the name line by enclosing it in
+double quotation marks. <em i> Note: </em>Systems using the subordinate name parts must still provide the
+name structure formed in the same way specified for &lt;
+<a href=55gcch2.htm#NAME_PERSONAL>NAME_PERSONAL</a>&gt;.)
+<br>
+<br>
+<LI>A submission record was added to GEDCOM to enable the sending system to transmit
+information which will enable the receiving system to more appropriately process the GEDCOM
+data. The format currently designed for the submission record was created specifically for
+TempleReady<em sup>%</em> system and for GEDCOM files being downloaded from Ancestral File<em sup>%</em>. (See
+<a href=55gcch2.htm#SUBMISSION_RECORD>SUBMISSION_RECORD</a>.)
+<br>
+<br>
+<LI>A RESTRICTION (RESN) tag and a &lt;RESTRICTION_NOTICE&gt; primitive were added to the
+INDIVIDUAL_RECORD context. This allows some records in Ancestral File to be marked for
+privacy (indicating some personal information is not included) and some records to be marked
+as locked (indicating that Ancestral File will not make changes to the record without
+authorization from an assigned record steward). 
+<br>
+<br>
+<LI>The following tags are no longer used in the Lineage-Linked Form:
+<br>
+ARVL, BROT, BUYR, CEME, CNTC, CPLR, DEFM, DPRT, EDTR, FIDE, FILM, GODP,
+HDOH, HEIR, HFAT, HMOT, INFT, INDX, INTV, ISA, ISSU, ITEM, LABL, LCCN,
+LGTE, MBR, NAMS, NAMR, OFFI, ORIG, OWNR, PERI, PORT, PWIF, PUBR, RECO,
+SELR, SEQU, SERS, SIBL, SIGN, SIST, SITE, TXPY, XLTR, WFAT, WITN, WMOT,
+AUDIO, IMAGE, PHOTO, SCHEMA, VIDEO
+<br>
+<br>
+<LI>The following tags were added:
+<br>
+BLOB, CTRY, CREM, FCOM, GIVN, NPFX, NSFX, OBJE, PEDI, RELA, RESI, RESN,
+SUBN, SURN, STAT
+</UL>
+<br>
+<br>
+<B><a name=S5></a> Changes Introduced in Draft Version 5.3</B>
+<br>
+<br>
+Version 5.3 introduced the following changes to the GEDCOM standard:
+<br>
+<br>
+<UL>
+<LI>An address structure was defined.
+<br>
+<br>
+<LI>A new tag for marital status (MSTA) at the time of an event was added to the event structure.
+(This was removed in version 5.4.)
+<br>
+<br>
+<LI>A mechanism for creating user-defined tags was added. These were defined in a SCHEMA
+definition in the header record of 5.3. (SCHEMA was removed in version 5.4.)
+<br>
+<br>
+<LI>The Unicode standard (ISO 10646) was introduced as an additional character set. (This was
+reduced to potential character set in version 5.4. See <a href=55gcch3.htm>Chapter 3</a>.)
+<br>
+<br>
+<LI>A &lt;&lt;MULTIMEDIA_LINK&gt;&gt; structure was introduced to provide linking and embedding
+of digitized photo, video, and sound files. (This was modified in version 5.4. See
+<a href=55gcch2.htm#MULTIMEDIA_LINK>MULTIMEDIA_LINK</a> and
+<a href=55gcch2.htm#MULTIMEDIA_RECORD>MULTIMEDIA_RECORD</a>
+)
+<br>
+<br>
+<LI>The source structure NAME tag, meaning the name of the source in the
+&lt;&lt;SOURCE_STRUCTURE&gt;&gt;, was changed back to the TITLe tag and is used to show the
+title of a book, article, or descriptive title of non-titled sources.
+<br>
+<br>
+<LI>The &lt;&lt;SOURCE_STRUCTURE&gt;&gt; was changed. Usage of CPLR, XLTR, and INFT tags in
+source substructures was discontinued.
+<br>
+<br>
+<LI>The FORM {FORMAT} tag was added subordinate to the PLACe and the GEDCom tags in the
+HEADER record and also subordinate to the PLACe tag in the
+&lt;&lt;PLACE_STRUCTURE&gt;&gt;. The PLAC.FORM line in the header record indicates that all
+of the locality names are specified in a consistent hierarchal sequence as specified by the value
+of the FORM. For example: 2 FORM City, County, State. GEDCOM 5.2 used the TYPE tag,
+subordinate to the PLAC tag instead of the FORM tag, for this purpose. This provision is for
+products which have overly structured the place value.
+</UL>
+<p>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+</BODY></HTML>

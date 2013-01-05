@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+<TITLE>The GEDCOM Standard Release 5.5: Letter</TITLE>
+<!-- This file was created by the WP2X program, using an HTML 
+descriptor file (Version 1) written by Michael Richardson
+Do not expect everything to be converted perfectly.  -->
+</HEAD>
+<BODY>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+<H1 align=center>The GEDCOM Standard Release 5.5: Letter</H1>
+<H2 align=center>January 2, 1996</H2>
+<br>
+Dear GEDCOM Developer:
+<br>
+<br>
+This letter accompanies the final version of <em i>The GEDCOM Standard, Release 5.5</em>.  Thank you for your
+feedback on preceding drafts, especially 5.4.  The number of respondents and the depth of suggestions
+is greatly appreciated.  For the first time, most of the feedback came via email.
+<br>
+Among other things, this release adds comprehensive support for genealogical documentation and
+formally defines the <em i>valid combinations</em> of tags used by lineage-linked form compatible programs.
+<br>
+<br>
+If you do not plan to read the entire 5.5 release at this time, please take time to study the following
+sections:
+<br>
+<br>
+  A. <a href=55gcmod.htm>Data Model Chart</a>.
+<br>
+<br>
+  This is a visual summary of the structural relationships between elements of the Lineage-linked
+form.  This information is not part of the official document, but it provides an important high
+level perspective.
+<br>
+<br>
+  B. <a href=55gcint.htm>Introduction</a>
+<br>
+<br>
+  C. <a href=55gcch2.htm#PERMANENT_RECORD_FILE_NUMBER>PERMANENT_RECORD_FILE_NUMBER</a>
+<br>
+<br>
+  NOTICE: Programs that check cross reference pointers should be modified to expect pointers to
+records that are not present in the transmission but are available on a network (future
+implementation).  These pointers contain a colon (:) character.  For the time being, they can be
+treated as if the line were not present.
+<br>
+<br>
+  D. <a href=55gcch2.htm#S4>Compatibility with Other GEDCOM Versions</a>
+<br>
+<br>
+  E. GEDCOM Product Registration (see <a href=55gcch4.htm>Chapter 4</a>)
+<br>
+<br>
+Needed changes that would cause major incompatibilities with prior implementations were postponed
+until release 6.0, some time in the future. Minor 5.x releases may occur in the interim.
+<br>
+<br>
+Official, current GEDCOM documents are now available by anonymous ftp at 
+<B><a href=ftp://ftp.gedcom.org/pub/genealogy/gedcom>ftp.gedcom.org</a></B>
+ in the
+directory 
+<B> /pub/genealogy/gedcom</B>
+.  This includes a postscript and a WordPerfect version of <em i>The
+GEDCOM Standard</em>, a postscript version of the data model charts, this cover letter, and answers to
+frequently asked questions (FAQ).
+<br>
+<br>
+All future announcements about GEDCOM<em i> </em>will be sent via email.  To subscribe to our announcement
+list, please send email to <a href=mailto:gedcom@gedcom.org>gedcom@gedcom.org</a>,
+with the word 
+<B> subscribe </B>
+in the message area.  Those
+already added to the list have been notified by email.
+<br>
+<br>
+Questions and suggestions may be sent via email to 
+<B><a href=mailto:gedcom@gedcom.org>gedcom@gedcom.org</a></B>,
+by regular mail or by
+telephone as indicated on the <a href=55gctoc.htm>title page</a>.
+<br>
+<br>
+Thank you for your interest in <em i>The GEDCOM Standard</em>.
+<br>
+<br>
+    Sincerely,
+<br>
+<br>
+    William S. Harten
+<br>
+    GEDCOM Product Manager
+<br>
+<br>
+This release of the GEDCOM Standard contain the following changes which were made subsequent to
+the release of the standard dated 11 December 1995 and distributed by mail just before Christmas:
+<br>
+<br>
+Table of Contents:
+<br>
+  Encoding and Decoding Algorithms for Multimedia Objects......
+<br>
+<br>
+Page 5:
+<br>
+  The second bullet item concerning the date definition.  
+<br>
+<br>
+<UL>
+<LI>The definition of the date value was refined to include many of the potential ways in which a person
+may define an imprecise date in a free form text field. <em role="redline">  Systems which guide users through a date
+statement should not result in such a precise way of stating an imprecise date.  For example, if
+software</em> was to estimate a marriage date based on an algorithm involving the birth date of the
+couple's first child, hardly needs to say "EST ABT 1881".
+</UL>
+<br>
+  
+<br>
+page 58:
+<br>
+  The third bullet item concerning Multiple Names.
+<br>
+<br>
+<UL>
+<LI><B> Multiple Names</B>
+:
+<br>
+...  The same thing often happens with other multiple-instance tags when only one instance was
+expected by the receiving system. GEDCOM 5.4 and prior 5.x drafts specified that multiple names
+should be listed with the preferred name first.  PAF and other products that handle one name only
+may drop the preferred name under this arrangement.  Therefore GEDCOM 5.5 specifies that the
+preferred instance of multi-valued information is to be listed last. 
+</UL>
+<br>
+<br>
+page 69:
+<br>
+From the first paragraph.
+<br>
+<br>
+... To ensure all transmitted information in the Lineage-Linked GEDCOM is uniformly identified
+the standardized tags cannot be placed in any other context than shown in <a href="55gcch2.htm">Chapter 2</a>.  It is legal to
+extend the context of the form, but only by using<em role="redline">  user-defined</em> tags which must begin with an
+underscore.
+<br>
+<br>
+page 77:
+<br>
+<br>
+<B> STAE {STATE}:</B>
+=
+<br>
+A geographical division of a larger jurisdictional area, such as a <em role="redline"> State within the United States of
+America.</em>
+<p>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+</BODY></HTML>

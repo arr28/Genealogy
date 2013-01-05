@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>The GEDCOM Standard Release 5.5: Appendix D</TITLE>
+<!-- This file was created by the WP2X program, using an HTML 
+descriptor file (Version 1) written by Michael Richardson
+Do not expect everything to be converted perfectly.  -->
+</HEAD>
+<BODY>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+<H1 align=center>The GEDCOM Standard Release 5.5</H1>
+<H2 align=center> Appendix D</H2>
+<B>ANSEL Character Set</B>
+<br>
+<br>
+The following tables show the spacing and non-spacing diacritic characters that are contained in the ANSEL set required
+by the languages supported by GEDCOM 5. This table was added to give help to those receiving the GEDCOM standard
+on disk. <em i>The graphic characters shown are not always accurate, however the name of the diacritic and the decimal
+equivalent should agree with the ANSEL standard.</em>
+<br>
+<br>
+<UL>
+<LI><em u> C/R</em>
+ column refers to the column and row of the American National Standard Z39.47-1985 table showing the
+ANSEL character graphic and its 8 bit binary representation.
+<br>
+<br>
+<LI><em u> wpcode</em>
+ column shows the Wordperfect (code page and character number, for example 1,2) chosen as the closest
+representation of the diacritic as shown in Wordperfect 5.1 Appendix P.
+<br>
+<br>
+<LI><em u> Dec</em>
+ column shows to the decimal equivalent for that diacritic as is used in the ANSEL character set. The
+hexadecimal equivalent is obtained from converting the C/R column in to a to character hexadecimal number, for
+example 14/10 converts to EA hex or 234 dec.
+<br>
+<br>
+<LI>  
+<em u> Name</em>
+ column gives the english name of the diacritic.
+<br>
+<br>
+<LI><em u> example of use</em>
+ column shows an example of words using this diacritic. For the non-spacing diacritic, this mark
+appears before the character in which it should be superimposed.
+</UL>
+<PRE>
+
+<a name=S1></a>        ANSEL Non-spacing graphic characters
+HTML/   8-bit
+SGML    C/R  wpcode Dec Graphic Name                          example of use
+        14/0  2,4   224    à    low rising tone mark          càui
+*grave  14/1  1,0   225    á    grave accent                  r&egrave;gle
+*acute  14/2  1,6   226    &#180;    acute accent                  est&aacute;
+*circ   14/3  1,3   227    &#94;    circumflex accent             m&ecirc;me
+*tilde  14/4  1,2   228    &#126;    tilde                         ni&ntilde;o
+*macr   14/5  1,8   229    &#175;    macron                        g&amacr;j&emacr;js
+*brev   14/6  1,22  230    æ    breve                         alt&abrev;
+*dot    14/7  1,15  231    ç    dot above                     &zdot;aba
+*uml    14/8  1,7   232    &#168;    umlaut (diaeresis)            &ouml;ppna
+        14/9  1,19  233    é    hacek                         vézdy
+*ring   14/10 1,14  234    ê    circle above (angstrm)        h&aring;r
+        14/11 2,11  235    ë    ligature, left half           akademiiëëa
+        14/12 2,12  236    ì    ligature, right hlf           akademiiììa
+        14/13 1,10  237    í    high comma, off center        rozdeílovac
+*dblac  14/14 1,16  238    î    double acute accent           id&odblac;szaki
+        14/15 2,25  239    ï    candrabindu                   Aliïiev
+*cedil  15/0  2,15  240    &#184;    cedilla                       &ccedil;a
+        15/1  2,17  241    ñ    right hook                    vietña
+        15/2  2,0   242    ò    dot below                     teòda
+        15/3  2,1   243    ó    double dot below              khuótbah
+        15/4  2,3   244    ô    circle below                  Maharôsicaritamôrtam
+        15/5  2,6   245    õ    double underscore             õGhulam
+        15/6  2,7   246    ö    underscore                    samar
+        15/7  2,16  247    ÷    left hook                     darzi÷na
+        15/8  2,14  248    ø    right cedilla                 khøong
+        15/9  2,9   249    ù    half circle below             ùhumantuùs
+        15/10       250         double tilde, left half       úngalan
+        15/11       251         double tilde, right hlf       ûngalan
+        15/12 1,5   252    ü    diacritic slash through char (LDS extension)
+        15/13
+        15/14 1,9   254    þ    high comma, centered          gþeotermika
+        
+<a name=S2></a>        ANSEL Spacing graphic characters
+HTML/   8-bit
+SGML    C/R  wpcode Dec Graphic Name                          example of use
+        10/0  
+Lstrok  10/1  1,152 161    &Lstrok;    slash L - uppercase           &Lstrok;&Lstrok;d&Lstrok;
+Oslash  10/2  1,80  162    &Oslash;    slash O - uppercase           &Oslash;st
+Dstrok  10/3  1,78  163    &Dstrok;    slash D - uppercase           &Dstrok;uro
+THORN   10/4  1,88  164    &THORN;    thorn - uppercase             &THORN;ann
+AElig   10/5  1,36  165    &AElig;    ligature AE - uppercase       &AElig;gir
+OElig   10/6  1,166 166    &OElig;    ligature OE - uppercase       &OElig;uvre
+        10/7  1,6   167    §    miagkii znak                  fakul§tet
+#183    10/8  1,1   168    &#183;    middle dot                    novel&#183;la
+        10/9  5,28  169    ©    musical flat                  B©
+        10/10 4,22  170    ª    patent mark                   ABCª
+#177    10/11 6,1   171    &#177;    plus or minus                 A&#177;B
+        10/12 1,230 172    ¬    hook O - uppercase            B¬
+        10/13 1,232 173    ­    hook U - uppercase            X­A
+        10/14 1,11  174    ®    alif                          Un®yusho
+        10/15       175                                       reserved - future
+        11/0  2,11  176    °    ayn                           fa°il
+lstrok  11/1  1,153 177    &lstrok;    slash l - lowercase           rozbi&lstrok;
+oslash  11/2  1,81  178    &oslash;    slash o - lowercase           h&oslash;j
+dstrok  11/3  1,79  179    &dstrok;    slash d - lowercase           &dstrok;avola
+thorn   11/4  1,89  180    &thorn;    thorn - lowercase             &thorn;ann
+aelig   11/5  1,37  181    &aelig;    ligature ae - lowercase       sk&aelig;g
+oelig   11/6  1,167 182    &oelig;    ligature oe - lowercase       &oelig;uvre
+        11/7  1,16  183    ·    tverdyi znak                  ob·iavlenie
+inodot  11/8  1,24  184    &inodot;    dotless i - lowercase         masal&inodot;
+#163    11/9  4,11  185    &#163;    British pound                 &#163;5.00
+eth     11/10       186    &eth;    eth
+        11/11       187         reserved - future
+        11/12 1,231 188    ¼    hook o - lowercase            S¼
+        11/13 1,233 189    ½    hook u - lowercase            T½ D½c
+        11/14       190         empty box (LDS-extension)
+        11/15       191         black box (LDS-extension)
+#176    12/0  6,33  192    &#176;    degree sign                   10&#176; C
+        12/1  6,49  193    Á    script l                      25Á.
+        12/2  4,71  194    Â    phonograph cpyright mrk       DeccaÂ
+copy    12/3  4,23  195    &copy;    copyright mark                &copy;1993
+        12/4  5,27  196    Ä    musical sharp                 DÄ
+#191    12/5  4,8   197    &#191;    inverted question mark        &#191;Que
+#161    12/6  4,7   198    &#161;    inverted exclamtn mrk         &#161l;Esta
+        12/13       205         e in middle of line (LDS extension)
+        12/14       206         o in middle of line (LDS extension)
+szlig   12/15 1,23  207    &szlig;    Es Zet                        Preu&szlig;en
+</PRE>
+<p>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+</BODY></HTML>

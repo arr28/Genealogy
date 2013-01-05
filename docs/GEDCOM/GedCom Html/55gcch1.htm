@@ -1,0 +1,754 @@
+<HTML>
+<HEAD>
+<TITLE>The GEDCOM Standard Release 5.5: Chapter 1</TITLE>
+<!-- This file was created by the WP2X program, using an HTML 
+descriptor file (Version 1) written by Michael Richardson
+Do not expect everything to be converted perfectly.  -->
+</HEAD>
+<BODY>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+<H1 align=center>The GEDCOM Standard Release 5.5</H1>
+<H2 align=center> Chapter 1</H2>
+<br>
+<B>Data Representation Grammar</B>
+<br>
+<br>
+<B> Introduction
+<br>
+</B>
+<br>
+This chapter describes the core GEDCOM data representation language.
+<br>
+<br>
+The generic data representation language defined in this chapter may be used to represent any form
+of structured information, not just genealogical data, using a sequential stream of characters.
+<br>
+<br>
+<B><a name=S1></a> Concepts</B>
+<br>
+<br>
+A GEDCOM transmission represents a database in the form of a sequential stream of related
+records. A record is represented as a sequence of tagged, variable-length lines, arranged in a
+hierarchy. A line always contains a hierarchical level number, a tag, and an optional value. A line
+may also contain a cross-reference identifier or a pointer. The GEDCOM line is terminated by a
+carriage return, a line feed character, or any combination of these.
+<br>
+<br>
+The tag in the GEDCOM line, taken in its hierarchial context, identifies the information contained
+in the line, in the same sense that a field-name identifies a field in a database record. This means
+that the data is self-defining. Tags allow a field to occur any number of times within a record,
+including zero times. They also allow the use of different or new fields to be included in the
+GEDCOM data without introducing incompatibility, because the receiving system will ignore data
+which it does not understand and process only the data that it does understand.
+<br>
+<br>
+The hierarchical relationships are indicated by a level number. Subordinate lines have a higher level
+number. The hierarchy allows a line to have sub-lines, which in turn may have their own sub-lines,
+and so forth. A line and its sub-lines constitute a context or enclosure, that is, a cluster of
+information pertaining directly to the same thing. This hierarchical arrangement corresponds with
+the natural hierarchy found in most structured information.
+<br>
+<br>
+A series of one or more lines constitutes a record. The beginning of a new record is indicated by a
+<em i>line whose level number is 0 (zero).</em>
+<br>
+<br>
+In addition to hierarchical relationships, GEDCOM defines the inter-record relationships that allow a
+record to be logically related to other records, without introducing redundancy. These relationships
+are represented by two additional, but optional, parts of a line: a cross-reference pointer and a
+cross-reference identifier. The cross-reference pointer "points at" a related record, which is
+identified by a required, matching unique cross-reference identifier. The cross-reference identifier is
+analogous to a primary key in relational database terminology.
+<br>
+<br>
+<B><a name=S2></a> Grammar</B>
+<br>
+<br>
+This chapter defines the grammar for the GEDCOM format. The grammar is a set of rules that
+specify the character sequences that are valid for creating the expression of the GEDCOM line. The
+character sequences are described in terms of various combinations of elements (variables and/or
+constants). Elements may be described in terms of a set of other elements, some of which areselected from a set of alternative elements. Each element in the definition is separated by a plus sign
+(+) signifying that both elements are required. When there is a choice of different elements that can
+be used, the set of alternatives are listed between opening and closing square brackets ([]), with each
+choice separated by a vertical bar ([alternative_1 | alternative_2]). The user can read the grammar
+components of the selected element by substituting any sub-elements until all sub-elements have been
+resolved.
+<br>
+<br>
+A GEDCOM transmission consists of a sequence of logical records, each of which consists of a
+sequence of 
+<B> gedcom_lines</B>
+, all contained in a sequential file or stream of characters. The following
+rules pertain to the 
+<B> gedcom_line</B>
+:
+<br>
+<br>
+<UL>
+<LI>Long values can be broken into shorter GEDCOM lines by using a subordinate CONC or
+CONT tag. The CONC tag assumes that the accompanying subordinate value is concatenated to
+the previous line value without saving the carriage return prior to the line terminator. The
+CONT assumes that the subordinate line value is concatenated to the previous line, saving the
+carriage return.
+<br>
+<br>
+<LI><B> </B>
+The beginning of a new logical record is designated by a line whose 
+<B> level</B>
+ number is 0 (zero).
+<br>
+<br>
+<LI>Each new level number must be no higher than the previous line plus 1.
+<br>
+<br>
+<LI>Logical GEDCOM record sizes should be constrained so that they will fit in a memory buffer of
+less than 32K. GEDCOM files with records sizes greater than 32K run the risk of not being able
+to be loaded in some programs.  Use of pointers to records, particularly NOTE records, should
+ensure that this limit will be sufficient. The size of embedded multimedia records can be
+controlled through chaining MULTIMEDIA_RECORDS (see multimedia record format on p.
+.)
+<br>
+<br>
+<LI>Any length constraints are given in characters, not bytes.  When wide characters (characters
+wider than 8 bits) are used, byte buffer lengths should be adjusted accordingly.
+<br>
+<br>
+<LI>Level numbers must be between 1 to 99 and must not contain leading zeroes, for example, level
+one must be 1, not 01.
+<br>
+<br>
+<LI>The cross-reference ID has a maximum of 22 characters, including the enclosing at signs (@),
+and it must be unique within the GEDCOM transmission.
+<br>
+<br>
+<LI>Pointers to records imply that the record pointed to does actually exists within the transmission.
+Future pointer structures may allow pointing to records within a public accessible database as an
+alternative.
+<br>
+<br>
+<LI>The length of the GEDCOM TAG is a maximum of 31 characters, with the first 15 characters
+being unique.
+<br>
+<br>
+<LI>The total length of a GEDCOM line, including leading white space, level number, cross-reference number, tag, value, delimiters, and terminator, must not exceed 255 (wide)
+characters. 
+<br>
+<br>
+<LI>Leading white space (tabs, spaces, and extra line terminators) preceding a GEDCOM line
+should be ignored by the reading system. Systems generating GEDCOM should not place any
+white space in front of the GEDCOM line.
+</UL>
+<br>
+<br>
+<br>
+<B> Grammar Syntax</B>
+<br>
+<br>
+A 
+<B> gedcom_line</B>
+ has the following syntax:
+<br>
+<br>
+<B> gedcom_line</B>
+:=
+<br>
+ 
+<B> level + delim + [xref_id + delim +] tag + [delim + line_value +] terminator</B>
+<br>
+ 
+<B> level + delim + optional_xref_id + tag + delim + optional_line_value + terminator</B>
+<br>
+<br>
+for example:
+<br>
+  1 NAME Will /Rogers/
+<br>
+<br>
+The components used in the pattern above are defined below in alphabetical order. Some of the
+components are defined in terms of other primitive patterns. The spaces used in the patterns below
+are only to set them apart and are not a part of the resulting pattern. Character constants are
+specified in the hex form (0x20) which is the ASCII hex value of a space character. Character
+constants that are separated by a (-) dash represent any character with in that range from the first
+constant shown to and including the second constant shown.
+<br>
+<br>
+<B> alpha</B>
+:=
+<br>
+[(0x41)-(0x5A) | (0x61)-(0x7A) | (0x5F) ]
+<br>
+  where:
+<br>
+(0x41)-(0x5A)=A to Z
+<br>
+(0x61)-(0x7A)=a to z
+<br>
+(0x5F)=(_) underscore
+<br>
+<br>
+<B> alphanum</B>
+:=
+<br>
+[
+<B> alpha</B>
+ | 
+<B> digit</B>
+ ]
+<br>
+<br>
+<B> any_char</B>
+:=
+<br>
+[alpha | digit | otherchar | (0x23) | (0x20) | (0x40)+(0x40) ]
+<br>
+  where:
+<br>
+(0x23)=#
+<br>
+(0x20)=space character
+<br>
+(0x40)+(0x40)=@@
+<br>
+<br>
+<B> delim</B>
+:=
+<br>
+[(0x20) ]
+<br>
+  where:
+<br>
+(0x20)=space_character
+<br>
+<br>
+<B> digit</B>
+:=
+<br>
+[(0x30)-(0x39) ]
+<br>
+where:
+<br>
+(0x30)-(0x39) = One of the digits 0, 1,2,3,4,5,6,7,8,9
+<br>
+<br>
+<B> escape</B>
+:=
+<br>
+[(0x40) + (0x23) + escape_text + (0x40) + non_at ]
+<br>
+where:
+<br>
+  (0x40)=@
+<br>
+  (0x23)=#
+<br>
+<br>
+<B> escape_text</B>
+:=
+<br>
+<B> </B>
+[any_char | escape_text + any_char ]
+<br>
+The escape_text is coded to meet the rules of a particular GEDCOM form.
+<br>
+<B> </B>
+<br>
+<B> level</B>
+:=
+<br>
+[digit | level + digit ]
+<br>
+(Do not use non-significant leading zeroes such as 02.)
+<br>
+<br>
+<B> line_item</B>
+:=
+<br>
+[any_char | escape | line_item + any_char | line_item + escape]
+<br>
+<br>
+<B> line_value</B>
+:=
+<br>
+[ pointer | line_item ]
+<br>
+<br>
+<B> non_at</B>
+:=
+<br>
+[alpha | digit | otherchar | (0x23) | (0x20 ) ]
+<br>
+where:
+<br>
+  (0x20)=space character
+<br>
+  (0x23)=#
+<br>
+<br>
+<B> null</B>
+:= nothing
+<br>
+<br>
+<B> optional_line_value</B>
+:= line_value + delim
+<br>
+<br>
+<B> optional_xref_Id</B>
+:= xref_Id + delim
+<br>
+<br>
+<B> otherchar</B>
+:=
+<br>
+[(0x21)-(0x22) | (0x24)-(0x2F) | (0x3A)-(0x3F) | (0x5B)-(0x5E) | (0x60) |  (0x7B)-(0x7E) |
+(0x80)-(0xFE)]
+<br>
+where, respectively:
+<br>
+(0x21)-(0x22)=! "
+<br>
+(0x24)-(0x2F)=$  &amp; ' ( ) * + , - . /
+<br>
+(0x3A)-(0x3F)=: ; &lt; = &gt; ?
+<br>
+(0x5B)-(0x5E)=[ \ ] ^
+<br>
+(0x60)=`
+<br>
+(0x7B)-(0x7E)={ | } ~
+<br>
+(0x80)-(0xFE)=ANSEL characters above 127
+<br>
+<br>
+Any 8-bit ASCII character except control characters (0x00%0x1F), alphanum, space ( ), number
+sign (#), at sign (@), _ underscore, and the DEL character (0x7F).
+<br>
+<br>
+<B><a name=pointer></a> pointer</B>
+:=
+<br>
+[(0x40) + alphanum + pointer_string + (0x40) ]
+<br>
+where:
+<br>
+  (0x40)=@
+<br>
+<br>
+<B> </B>
+<B> pointer_char</B>
+:=
+<br>
+[non_at ]
+<br>
+<br>
+<B> pointer_string</B>
+:=
+<br>
+[null | pointer_char | pointer_string + pointer_char ]
+<br>
+<br>
+<B> tag</B>
+:=
+<br>
+[alphanum | tag + alphanum ]
+<br>
+<br>
+<B> terminator</B>
+:=
+<br>
+[carriage_return | line_feed | carriage_return + line_feed |
+<br>
+line_feed + carriage_return ]
+<br>
+<br>
+<B> xref_id</B>
+:=
+<br>
+[pointer
+<B> </B>
+]
+<br>
+<br>
+<B><a name=S3></a> Description of Grammar Components</B>
+<br>
+<br>
+<B> alpha</B>
+:=
+<br>
+The alpha characters include the underscore, which is used to link word pieces together in
+forming tag names or tag labels.
+<br>
+<br>
+<B> any_char</B>
+:=
+<br>
+Any 8-bit ASCII character except the control characters found in the range of 0x00%0x1F and
+0x7F. If an @ is desired as part of the line_value, it must be written in GEDCOM as a double
+@, i.e., "3 doz. @ $20.00" must be stored as "3 doz. @@ $20.00."
+<br>
+<br>
+<B> delim</B>
+:=
+<br>
+The 
+<B> delim</B>
+ (delimiter), a single space character, terminates both the variable-length 
+<B> level</B>
+ number
+and the variable-length 
+<B> tag</B>
+. Note that space characters may also be present in a 
+<B> value</B>
+.
+<br>
+<br>
+<B> escape</B>
+:=
+<br>
+The 
+<B> escape</B>
+ is a character sequence in the grammar used to specify special processing, such as
+for switching character sets or for indicating an inclusion of a non-GEDCOM data form into the
+GEDCOM structure. The form of the escape sequence is:
+<br>
+<br>
+@+#+
+<B> escape_text</B>
++@+
+<B> non_at</B>
+.
+<br>
+<br>
+Receiving systems should discard any space character which follows the escape sequences
+closing at-sign (@).
+<B> </B>
+ If the character following the escape sequence's closing at-sign (@) is not aspace character then it should be kept as a part of the text following the escape.  Systems
+writing escape sequences should always output a space character following the escape sequence.
+<br>
+<B> </B>
+<br>
+The specific format of the escape sequence is defined for the specific GEDCOM form being
+defined.
+<B> </B>
+<br>
+<br>
+<B> escape_text</B>
+:=
+<br>
+<B> </B>
+The escape_text is defined to meet the requirements of a particular GEDCOM form.
+<br>
+<B> </B>
+<br>
+<B> level</B>
+:=
+<br>
+The 
+<B> level</B>
+ number works the same way as the level of indentation in an indented outline, where
+indented lines provide detail about the item under which they are indented. A line at any level L
+is enclosed by and pertains directly to the <em i>nearest preceding line</em> at level L-1. The Level L may
+increase by 1 at most. Level numbers must not contain leading zeroes, for example level one
+must be (1), not (01).
+<br>
+<br>
+The enclosed subordinate lines at level L are said to be in the context of the enclosing superior
+line at level L-1. The interpretation of a 
+<B> tag</B>
+ must be in the context of the 
+<B> tag</B>
+s of the enclosing
+line(s) rather than just the tag by itself. Take the following record about an individual's birth
+and death dates, for example:
+<br>
+<PRE>
+  0 INDI
+    1 BIRT
+      2 DATE 12 MAY 1920
+    1 DEAT
+      2 DATE 1960
+</PRE>
+<br>
+In this example, the expression DATE 12 MAY 1920 is interpreted within the INDI (individual)
+BIRT (birth) context, representing the individual's birth date. The second DATE is in the
+INDI.DEAT (individual's death) context. The complete meaning of DATE depends on the
+context.
+<br>
+<br>
+  <em i>Note:</em>The above example is indented according to the level numbers to make the concept
+more obvious. <em i>In the actual GEDCOM data, the level numbers are lined up vertically,
+meaning they are the first character(s) of the GEDCOM line.</em>
+<br>
+<br>
+Some systems output indented GEDCOM data for better readability by putting space or tab
+characters between the terminator and the 
+<B> level</B>
+ number of the next line to visibly show the
+hierarchy. Also, some people have suggested allowing extra blank lines to visibly separate
+physical records. GEDCOM files produced with these features are not to be used when
+transmitting GEDCOM to other systems.
+<br>
+<B> </B>
+<br>
+<B> line_value</B>
+:=
+<br>
+The 
+<B> line_value</B>
+ identifies an object within the domain of possible values allowed in the context
+of the 
+<B> tag</B>
+. The combination of the 
+<B> tag</B>
+, the 
+<B> line_value</B>
+, and the hierarchical context of the
+supporting 
+<B> gedcom_line</B>
+s provides the understanding of the enclosed 
+<B> value</B>
+s. This domain is
+defined by a specific grammar for representing a given GEDCOM form. (See <a href="55gcch2.htm">Chapter 2</a>
+for Lineage-Linked GEDCOM Form grammar.)
+<br>
+<br>
+Values whose source information contains illegible parts of the value should be indicated by
+replacing the illegible part with an ellipsis (...).
+<br>
+<br>
+Values are generally not encoded in binary or other abbreviation schemes for reducing space
+requirements, and they are generally constrained to be understandable by a typical user without
+decoding. This is intended to reduce the decoding burden on the receiving software. A
+GEDCOM-optimized data compression standard will be defined in the future to reduce space
+requirements. Meanwhile, users may agree to compress and decompress GEDCOM files using
+any compression system available to both sender and receiver.
+<br>
+<br>
+The 
+<B> line_value</B>
+ within the context of a tag hierarchy of 
+<B> gedcom_line</B>
+s represents one piece of
+information and corresponds to one field in traditional database or file terminology.
+<br>
+<br>
+<B> otherchar</B>
+:=
+<br>
+Any 8-bit ASCII character except control characters (0x00%0x1F), 
+<B> alphanum,</B>
+ space ( ),
+number-sign (#), the at sign (@), and the DEL character (0x7F).
+<br>
+<br>
+<B> pointer</B>
+:=
+<br>
+A 
+<B> pointer</B>
+ stands in the place of the context identified by the matching 
+<B> xref_id</B>
+. Theoretically, a
+receiving system should be prepared to follow a 
+<B> pointer</B>
+ to find 
+<B> any</B>
+ needed
+<B> </B>
+ 
+<B> value</B>
+ in a manner
+that is transparent to the logic of the subsystem that is looking for specific 
+<B> tag</B>
+s. This highly
+flexible facility will probably be used more in the future. For the time being, however, the use
+of 
+<B> pointer</B>
+s is explicitly defined within the GEDCOM form, such as the Lineage-Linked
+GEDCOM Form defined in <a href="55gcch2.htm">Chapter 2)</a>.
+<br>
+<br>
+The 
+<B> pointer</B>
+ represents the association between two objects that usually reside in different
+records. Objects within a logical record can be associated. If this need exists, the pointer record
+composition contains an exclamation point (!) that separates the parent record's cross-reference
+ID from the specific substructure's cross-reference ID, which is at some subordinate level to the
+logical record at level zero. The cross-reference ID of the substructure subordinate to a zero
+level record, for inter-record associations is always composed of the Record ID number and the
+Substructure ID number, such as @I132!1@. Including the Record ID number in the pointer
+that associates objects within a record will allow the GEDCOM processors to build the index
+only at the record level and then search sequentially for the appropriate substructure cross-reference ID. The parent record ID is assumed when the cross-reference ID begins with a
+exclamation point (!) signifying an intra-record association.
+<br>
+<br>
+Complex logical record structures are divided into small physical records to accommodate
+memory constraints, many-to-many relationships, and independent record creation and deletion.
+<br>
+<br>
+The 
+<B> pointer</B>
+ must match a corresponding unique 
+<B> xref_id</B>
+ within the transmission, unless the
+colon (:) character is present (which will be used in the future as a network reference to a
+permanent file record). A 
+<B> pointer</B>
+ is given instead of duplicating an object, though the logical
+result is equivalent. An expanded traversal of a record tree includes following the 
+<B> pointer</B>
+ to
+related records to some depth, and splicing those records (logically) into the resultant expanded
+tree. <em i>Pointers may refer to either records which have not yet appeared in the transmission
+(forward reference) or to records that have already appeared earlier in the transmission(backward reference).</em> This arrangement usually requires a preliminary pass to construct a look
+up table to support random access by 
+<B> xref_id</B>
+ during subsequent passes.
+<br>
+<br>
+<B> tag</B>
+:=
+<br>
+A 
+<B> tag</B>
+ consists of a variable length sequence of 
+<B> alphanum</B>
+ characters. All user-defined tags, tags
+used that have not been defined in the GEDCOM standard, must begin with an underscore
+character (0x95).
+<br>
+<br>
+The 
+<B> tag</B>
+ represents the meaning of the 
+<B> line_value</B>
+ within the context of the enclosing lines, and
+contributes to the meaning of enclosed subordinate lines. Specific 
+<B> tag</B>
+s are defined in <a href=55gcappa.htm>Appendix A</a>. The presence of a tag together with a value represents an assertion
+which the submitter wishes to communicate to a receiver.  A tag with no value does not
+represent an assertion.  If a tag is absent, no assertion is made, for example, no information is
+submitted.  Information of a negative nature (such as knowing positively an event did not occur)
+is handled through the semantic definition of a tag and accompanying values that assert the
+information explicitly. It is not represented by absence of a tag.
+<br>
+<br>
+Although formally defined 
+<B> tag</B>
+s are only three or four characters long, systems should prepare to
+handle user tags of greater length. Tags will be unique within the first 15 characters.
+<br>
+<br>
+Valid combinations of specific 
+<B> tag</B>
+s, 
+<B> line_value</B>
+s, 
+<B> xref_id</B>
+s, and 
+<B> pointer</B>
+s are constrained by the
+GEDCOM form defined for representing a given kind of information. (See <a href="55gcch2.htm">Chapter 2</a> for the Lineage-Linked GEDCOM Form grammar.)
+<br>
+<br>
+<B> terminator</B>
+:=
+<br>
+The 
+<B> terminator</B>
+ delimits the variable-length 
+<B> line_value</B>
+ and signals the end of the 
+<B> gedcom_line</B>
+.
+The valid terminator characters are:
+<br>
+    [carriage_return |
+<br>
+    line_feed |
+<br>
+    carriage_return line_feed |
+<br>
+    line_feed carriage_return ]
+<br>
+<br>
+<B> xref_id</B>
+:=
+<br>
+(See <B><a href=#pointer>pointer</a></B>)
+<br>
+The 
+<B> xref_id</B>
+ is formed by any arbitrary combination of characters from the 
+<B> pointer_char</B>
+ set.
+The first character must be an alpha or a digit. The 
+<B> xref_id</B>
+ is not retained in the receiving
+system, and it may therefore be formed from any convenient combination of identifiers from the
+sending system. No meaning is attributed by the receiver to any part of the 
+<B> xref_id</B>
+, other than
+its 
+<B> unique</B>
+ association with the associated record. The use of the colon (:) character is also
+reserved.
+<br>
+<br>
+Examples:
+<br>
+<br>
+The following are examples of valid but unrelated GEDCOM lines:
+<br>
+<PRE>
+    0 @1234@ INDI
+      . . .
+      1 AGE 13y
+      . . .
+      1 CHIL @1234@
+      . . .
+      1 NOTE This is a note field that is
+        2 CONT continued on the next line.
+</PRE>
+<br>
+The first line has a 
+<B> level</B>
+ number 0, a 
+<B> xref_id</B>
+ of @1234@, an INDI 
+<B> tag</B>
+, and no 
+<B> value</B>
+.
+<br>
+<br>
+The second line has a 
+<B> level</B>
+ number 1, no 
+<B> xref_id</B>
+, an AGE 
+<B> tag</B>
+, and a 
+<B> value</B>
+ of 13.
+<br>
+<br>
+The third line has a 
+<B> level</B>
+ number 1, no 
+<B> xref_id</B>
+, a CHIL 
+<B> tag</B>
+, and a 
+<B> value</B>
+ of a 
+<B> pointer</B>
+ to a
+<B> xref_id</B>
+ named @1234@.
+<p>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+</BODY></HTML>

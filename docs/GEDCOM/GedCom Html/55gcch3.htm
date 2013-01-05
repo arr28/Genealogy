@@ -1,0 +1,204 @@
+<HTML>
+<HEAD>
+<TITLE>The GEDCOM Standard Release 5.5: Chapter 3</TITLE>
+<!-- This file was created by the WP2X program, using an HTML 
+descriptor file (Version 1) written by Michael Richardson
+Do not expect everything to be converted perfectly.  -->
+</HEAD>
+<BODY>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+<H1 align=center>The GEDCOM Standard Release 5.5</H1>
+<H2 align=center> Chapter 3</H2>
+<br>
+<B>Using Character Sets in GEDCOM</B>
+<br>
+<br>
+<B> Introduction</B>
+<br>
+<br>
+GEDCOM needs to accommodate different character sets to facilitate the sharing of genealogical
+data in different languages. To minimize the number of differing standards, we have chosen to have
+each system convert its usage to ANSEL, and eventually to UNICODE.
+<br>
+<br>
+In January 1991, a Unicode Consortium was founded to promote the use of the Unicode standard,
+which accommodates most all characters in one character set. (See the section <a href=#S3>"Unicode"</a>.) The Unicode Consortium has agreed with the ISO 10646 standard to merge, and Unicode will
+be a subset of the ISO 10646 international character encoding standard.
+<br>
+<br>
+Currently, it is difficult to handle the two- and four-character code sequences (wide characters).
+Therefore, until multi-byte handling becomes more common, ANSEL will be used to represent
+Latin-based characters.
+<br>
+<br>
+<em i>The GEDCOM Standard</em> does not address the implementation methods for multilingual processing,
+such as keyboard arrangements, sorting sequences, or character and graphic representations (font
+styles, proportional spacing, and so forth) on the CRT or printers. However, the Unicode standard
+has defined formatting characters that will indicate the direction of the text presentation and other
+text formatting character code.
+<br>
+<br>
+Systems using code pages to support diacritical characters must convert all characters above
+character codes 128 to its ANSEL representation for that code page.
+<br>
+<br>
+Most of the genealogy systems developed so far use ASCII, ANSEL, or both. ANSEL
+accommodates the set of Latin-based languages, as explained below. 
+<br>
+<br>
+<B><a name=S1></a> 8-Bit ANSEL</B>
+<br>
+<br>
+The 8-Bit ANSEL (American National Standard for Extended Latin Alphabet Coded Character Set
+for Bibliographic Use, Z39.47-1985 copyright) is the preferred character set for GEDCOM. It is
+used for all transmissions of information unless another character set is specified.
+<br>
+<br>
+Using this character set standard makes it possible to preserve the full integrity of the language by
+providing a method of using the standard ASCII character set and supplementing it with both non-spacing character modifiers (diacritic) as well as spacing special characters.
+<br>
+<br>
+<em i>Note:</em>Non-spacing means that the diacritic is printed without advancing the device's print position.
+The character being modified is then printed in the same position, resulting in a combined image of
+both the character and the diacritic(s).
+<br>
+<br>
+Storing ANSEL requires storing the non-spacing graphic character(s) preceding the ASCII character
+that the diacritic is to modify. The ANSEL standard specifies an extended 8-bit configuration (above
+128) to represent the spacing and non-spacing graphic characters that make up most of the Latinbased languages. ANSEL is a super-set of ASCII. The standard ASCII characters including the
+control characters are preserved.
+<br>
+<br>
+ANSEL is known by two other names:
+<UL>
+  <LI>ANSI Z39.47-1985
+<br>
+  <LI>American Library Association character set, used in library systems worldwide, including
+the MARC (Machine-Readable Catalog) format.
+</UL>
+<br>
+<br>
+A description of the codes for the ANSEL character set has been reproduced with permission and is
+included with the printed version of <em i>The GEDCOM Standard.</em> The description of ANSEL codes is
+not included in the electronic version. This description may be purchased from%
+<br>
+<br>
+American National Standards Institute
+<br>
+1430 Broadway
+<br>
+New York, N.Y. 10018
+<br>
+<br>
+The description of the ANSEL character set standard includes the following:
+<br>
+<UL>
+  <LI>An 8-Bit Code Table showing the ASCII and extended ANSEL codes
+<br>
+  <LI>An explanation or legend of these codes
+<br>
+  <LI>A chart that identifies the ANSEL Non-spacing Graphic Characters
+<br>
+  <LI>A chart that identifies the ASCII Control Characters
+<br>
+  <LI>A chart that identifies the ASCII Graphic Characters
+</UL>
+<br>
+Character set codes 0 through 127 are the same for 8-Bit ANSEL and 8-Bit ASCII (USA
+version%ANSI 8-Bit). Character set codes 128 through 255 are unique to the ANSEL character set.
+<br>
+<br>
+<B><a name=S2></a> ASCII (USA Version)</B>
+<br>
+<br>
+When a language does not <em i>need</em> diacritic characters or other special characters, and if you are not
+transmitting binary data, you will find it convenient to use ASCII (8-bit USA version) if your
+computer already supports it. This is a standard of the American National Standards Institute
+(ANSI). Most of the basic printable characters of ANSEL and ASCII (USA version%ANSI 8-Bit)
+are identical.
+<br>
+<br>
+<B><a name=S3></a> UNICODE (ISO 10646)</B>
+<br>
+<br>
+The Unicode standard is a new character code designed to encode text for storage in computer files.
+It is a subset of the upcoming ISO 10646 standard. The design of the Unicode standard is based on
+the simplicity and consistency of today's prevalent character code set, extended ASCII code set, but
+goes far beyond ASCII's limited ability to encode only the Latin alphabet: the Unicode encoding
+provides the capacity to encode most all of the characters used for written languages throughout the
+world. In order to accommodate the many thousands of characters used in the international text, the
+Unicode standard uses a 16-bit code set instead of extended ASCII's 8-bit code set. This expansion
+provides codes for approximately 65,000 characters. The Unicode standard assigns each character a
+unique 16-bit value, and does not use complex modes or escape codes to specify modified characters
+or special cases. UNICODE may adopt a 32-bit code to represent characters which should allow for
+all character representations. The text representation of the Unicode 16-bit numbers is U+0041
+which is assigned to the letter A, 65 decimal. The Unicode standard includes the Latin alphabet used
+for English, the Cyrillic alphabet used for Russian, the Greek, Hebrew, and Arabic alphabets. Otheralphabets used in countries across Europe, Africa, the Indian subcontinent, and Asia, such as
+Japanese Kana, Korean Hangul, and Chinese Bopomofo are included. The largest part of the
+Unicode standard is devoted to thousands of unified character codes for Chinese, Japanese, and
+Korean ideographs. (See "The Unicode standard", vol. 1 and 2, published by Addison-Wesley
+Publishing, for character code standards.)
+<br>
+<br>
+The Unicode character set environment should eventually contain a set of character for all
+languages. If the Unicode environment is used to produce a GEDCOM transmission, the header
+record would also be in Unicode, requiring receiving systems to determine whether the transmission
+is Unicode or ASCII before they could interpret the GEDCOM header. This would be done by
+reading the first two bytes of the transmission. If the first two bytes are 0x30 and 0x20 then the
+transmission will be in either ASCII or ANSEL as determined by the header record. If the first two
+bytes are 0x30 and 0x00 then the transmission should be processed as a Unicode transmission.
+(Different platforms may reverse the position of the null byte, in which case the test would be for
+0x00 and 0x30.)
+<br>
+<B> 
+<br>
+How to Change Character Sets
+<br>
+</B>
+<br>
+The character set for an entire transmission is specified in the character set line of the header
+record.
+<br>
+<br>
+The example below shows the specification in the header record:
+<br>
+<br>
+  
+<em u> Lvl </em>
+<em u> Tag </em>
+<em u> Value
+<br>
+</em>
+<PRE>
+  0 HEAD
+    1 SOUR PAF
+      2 VERS 2.1
+    1 DEST ANSTFILE
+<B>    1 CHAR ANSEL</B>
+</PRE>
+<br>
+The character set change remains in effect until the TRLR record is encountered at the end of the
+transmission.
+<br>
+<br>
+UNICODE character set should be used for multi-language support as soon as operating systems
+begin providing adequate storage and display support.
+<br>
+<br>
+For more information about character sets, see the following:
+<br>
+<UL>
+  <LI>Extended Latin Alphabet Coded Character Set for Bibliographic Use. American National
+Standards (ANSI), Z39.47, 1985.
+  <LI>"8-Bit ASCII%Structure and Rules." American National Standards (ANSI) X3.134.1%198x.
+  <LI>"7-Bit and 8-Bit ASCII Supplemental Multilingual Graphic Character Set (ASCII
+Multilingual Set)" (manuscript). American National Standards (ANSI), X3.134.2%198x.
+  <LI>"The Unicode standard", vol. 1 and 2, published by Addison-Wesley Publishing.
+</UL>
+<p>
+<a href="55gctoc.htm">[Contents]</a>
+<a href="../genweb.html">[Home]</a>
+<a href="mailto:pbmcbride@rcn.com">[Mail]</a>
+</BODY></HTML>
